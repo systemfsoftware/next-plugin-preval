@@ -5,7 +5,7 @@ import requireFromString from 'require-from-string';
 import { resolvePath as defaultResolvePath } from 'babel-plugin-module-resolver';
 import { getOptions } from 'loader-utils';
 import { createMatchPath, loadConfig } from 'tsconfig-paths';
-import isSerializable from './is-serializable';
+import isSerializable from './is-serializable.js';
 // @ts-expect-error
 import register, { revert } from '@babel/register';
 

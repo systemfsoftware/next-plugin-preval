@@ -1,5 +1,5 @@
 {
-  "name": "next-plugin-preval",
+  "name": "@systemfsoftware/next-plugin-preval",
   "version": "0.0.0",
   "description": "",
   "keywords": [
@@ -17,15 +17,29 @@
     "email": "ricokahler@me.com",
     "url": "https://github.com/ricokahler"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "tshy": {
+    "project": "./tsconfig.build.json",
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts",
+      "./config": "./src/config.ts",
+      "./loader": "./src/loader.ts"
+    },
+    "sourceDialects": [
+      "@systemfsoftware/source"
+    ]
+  },
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "semantic-release": "semantic-release",
-    "build": "./scripts/build",
+    "prepare": "pnpm turbo build",
+    "clean": "rimraf dist .tshy .tshy-build",
+    "build": "pnpm run clean && tshy",
     "lint": "eslint src",
-    "prepare": "npm run build",
     "build-example-app": "./scripts/build-example-app"
   },
   "dependencies": {
@@ -41,13 +55,15 @@
   },
   "devDependencies": {
     "@babel/cli": "7.24.8",
+    "@babel/eslint-parser": "7.25.1",
     "@babel/preset-typescript": "7.24.7",
+    "@total-typescript/tsconfig": "^1.0.4",
     "@types/babel__core": "7.20.5",
     "@types/jest": "26.0.24",
+    "@types/node": "^22.5.5",
     "@types/require-from-string": "1.2.3",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
-    "@babel/eslint-parser": "7.25.1",
     "eslint": "7.32.0",
     "eslint-config-react-app": "6.0.0",
     "eslint-plugin-flowtype": "5.10.0",
@@ -60,10 +76,54 @@
     "prettier": "2.8.8",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "rimraf": "^6.0.1",
     "semantic-release": "17.4.7",
+    "tshy": "^3.0.2",
+    "turbo": "^2.1.2",
     "typescript": "4.9.5"
   },
   "peerDependencies": {
     "next": "^9 || ^10 || ^11 || ^12.0.0 || ^13 || ^14"
-  }
+  },
+  "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "@systemfsoftware/source": "./src/index.ts",
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    },
+    "./config": {
+      "import": {
+        "@systemfsoftware/source": "./src/config.ts",
+        "types": "./dist/esm/config.d.ts",
+        "default": "./dist/esm/config.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/config.d.ts",
+        "default": "./dist/commonjs/config.js"
+      }
+    },
+    "./loader": {
+      "import": {
+        "@systemfsoftware/source": "./src/loader.ts",
+        "types": "./dist/esm/loader.d.ts",
+        "default": "./dist/esm/loader.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/loader.d.ts",
+        "default": "./dist/commonjs/loader.js"
+      }
+    }
+  },
+  "module": "./dist/esm/index.js",
+  "main": "./dist/commonjs/index.js",
+  "types": "./dist/commonjs/index.d.ts"
 }

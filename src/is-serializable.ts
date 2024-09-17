@@ -1,6 +1,6 @@
 // this copied and pasted from is from next.js
 // https://github.com/vercel/next.js/blob/235b4cd0a879c947a7b6906c75f1a1b0ba53ce62/packages/next/lib/is-serializable-props.ts
-import { SerializableError } from 'next/dist/lib/is-serializable-props';
+import { SerializableError } from 'next/dist/lib/is-serializable-props.js';
 
 const regexpPlainIdentifier = /^[A-Za-z_$][A-Za-z0-9_$]*$/;
 const method = 'preval';
